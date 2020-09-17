@@ -153,11 +153,17 @@
                                     <segue destination="QJ3-d6-ZOc" kind="presentation" identifier="Show Document Info" id="3gs-yT-0nI"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem systemItem="camera" id="BUl-0Q-XO8">
+                                <connections>
+                                    <action selector="takeBackgroundPhoto:" destination="wY0-N9-knH" id="OF3-DY-t0e"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="EmbeddedDocInfoHeight" destination="qN3-8j-i4n" id="3o1-wN-tqt"/>
                         <outlet property="EmbeddedDocInfoWidth" destination="tYg-zI-97y" id="rJd-rT-ZfA"/>
+                        <outlet property="cameraButton" destination="BUl-0Q-XO8" id="jkg-6k-3HP"/>
                         <outlet property="dropZone" destination="qzn-em-wMV" id="XOe-Rt-wHA"/>
                         <outlet property="emojiCollectionView" destination="Wfa-Kc-7P4" id="jpm-77-OkJ"/>
                         <outlet property="scrollView" destination="DhG-p8-Zcb" id="8xQ-tP-RWD"/>
@@ -337,6 +343,7 @@
                             <constraint firstItem="itw-bt-C6N" firstAttribute="centerY" secondItem="AKR-AX-Kh3" secondAttribute="centerY" id="GP3-uL-6J3"/>
                             <constraint firstItem="itw-bt-C6N" firstAttribute="centerX" secondItem="AKR-AX-Kh3" secondAttribute="centerX" id="UXY-0X-8Kt"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="uZH-i8-eLN"/>
                     </view>
                     <connections>
                         <outlet property="createdLabel" destination="7gg-3i-zfQ" id="LRH-DO-dhF"/>
