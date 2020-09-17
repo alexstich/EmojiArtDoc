@@ -37,11 +37,22 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
                     ppc.delegate = self
                 }
             }
+        } else if segue.identifier == "Embed Document Info" {
+            embededdDocInfo = segue.destination.contents as? DocumentInfoViewController
         }
     }
     
+    private var embededdDocInfo: DocumentInfoViewController?
+    
+    @IBOutlet weak var EmbeddedDocInfoHeight: NSLayoutConstraint!
+    @IBOutlet weak var EmbeddedDocInfoWidth: NSLayoutConstraint!
+    
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
+    }
+    
+    @IBAction func close(bySegue: UIStoryboardSegue) {
+        close()
     }
   
     // MARK: Model
@@ -80,7 +91,7 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         }
     }
     
-    @IBAction func close(_ sender: UIBarButtonItem) {
+    @IBAction func close(_ sender: UIBarButtonItem? = nil) {
         if let observer = emojiViewObserver {
             NotificationCenter.default.removeObserver(observer)
         }
@@ -109,6 +120,11 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
             queue: OperationQueue.main,
             using: { (notification) in
                 print("documentState changed to \(self.document!.documentState)")
+                if self.document!.documentState == .normal, let docInfoVC = self.embededdDocInfo {
+                    docInfoVC.document = self.document
+                    self.EmbeddedDocInfoHeight.constant = docInfoVC.preferredContentSize.width
+                    self.EmbeddedDocInfoHeight.constant = docInfoVC.preferredContentSize.height
+                }
         })
         document?.open { success in
             if success {
